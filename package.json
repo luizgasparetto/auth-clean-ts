@@ -10,7 +10,8 @@
     "test": "jest --runInBand --detectOpenHandles --no-cache",
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.config.ts",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "seed:admin": "ts-node-dev src/core/shared/seeds/admin_seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.4.0",
