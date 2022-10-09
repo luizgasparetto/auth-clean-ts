@@ -1,7 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import { Client } from "pg";
 
-class PrismaClientEnviroment {
+import { v4 as uuid } from "uuid";
+
+export class PrismaClientEnviroment {
   private connectionString: string;
 
   constructor() {
@@ -11,7 +13,9 @@ class PrismaClientEnviroment {
     const dbPort = process.env.DATABASE_PORT;
     const dbName = process.env.DATABASE_NAME;
 
-    this.connectionString = `postgresql://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?schema=public`;
+    const schema = `public_${uuid()}`;
+
+    this.connectionString = `postgresql://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?schema=${schema}`;
   }
 
   get prisma() {
@@ -26,5 +30,3 @@ class PrismaClientEnviroment {
     await client.end();
   }
 }
-
-export { PrismaClientEnviroment };
