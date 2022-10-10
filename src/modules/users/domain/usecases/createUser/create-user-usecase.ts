@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
 
-import { DomainError } from "../../../../core/shared/errors/DomainError";
-import { CreateUserDTO } from "../dtos/CreateUserDTO";
-import { IUserRepository } from "../repositories/IUserRepository";
+import { DomainError } from "../../../../../core/shared/errors/DomainError";
+import { CreateUserDTO } from "../../dtos/CreateUserDTO";
+import { IUserRepository } from "../../repositories/i-user-repository";
 
 @injectable()
 class CreateUserUseCase {

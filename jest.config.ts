@@ -9,5 +9,28 @@ export default {
   roots: ['<rootDir>/src'],
   testEnvironment: "node",
   testMatch: ["**/*.spec.ts"],
-  transform: { '.+\\.ts$': 'ts-jest' },
+  transform: {
+    '^.+\\.(t|j)s$': [
+      '@swc/jest',
+      {
+        jsc: {
+          parser: {
+            syntax: 'typescript',
+            tsx: false,
+            decorators: true,
+          },
+          target: 'es2017',
+          keepClassNames: true,
+          transform: {
+            legacyDecorator: true,
+            decoratorMetadata: true,
+          },
+        },
+        module: {
+          type: 'es6',
+          noInterop: false,
+        },
+      },
+    ],
+  },
 };

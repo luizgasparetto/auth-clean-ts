@@ -1,7 +1,7 @@
 
 import { CreateUserDTO } from "../../domain/dtos/CreateUserDTO";
 import { UserEntity } from "../../domain/entities/UserEntity";
-import { IUserRepository } from "../../domain/repositories/IUserRepository";
+import { IUserRepository } from "../../domain/repositories/i-user-repository";
 
 import { PrismaClientEnviroment } from "../../../../../prisma/PrismaClientEnviroment";
 import { UserEntityAdapter } from "../adapters/UserEntityAdapter";
@@ -23,7 +23,7 @@ class UserRepositoryImpl implements IUserRepository {
 
     if (!user) return null;
 
-    return new UserEntityAdapter().fromDb(user);
+    return UserEntityAdapter.fromDb(user);
   }
 
   async findByEmail(id: string): Promise<UserEntity | null> {
@@ -31,7 +31,7 @@ class UserRepositoryImpl implements IUserRepository {
 
     if (!user) return null;
 
-    return new UserEntityAdapter().fromDb(user);
+    return UserEntityAdapter.fromDb(user);
   }
 }
 

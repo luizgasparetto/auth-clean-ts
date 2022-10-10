@@ -1,5 +1,3 @@
-import { Request, Response } from "express";
-
 export abstract class AppError {
   public readonly message: string;
   public readonly statusCode: number;

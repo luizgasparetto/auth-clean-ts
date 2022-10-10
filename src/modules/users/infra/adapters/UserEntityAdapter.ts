@@ -1,19 +1,13 @@
-import { Adapter } from "src/core/shared/contracts/Adapter";
-
 import { Users } from "@prisma/client";
-import { UserEntity } from "../../domain/entities/UserEntity";
+import { UserEntity, UserEntityProps } from "../../domain/entities/UserEntity";
 
-class UserEntityAdapter implements Adapter<Users, UserEntity> {
-  fromDb(object: Users): UserEntity {
-    return new UserEntity(
-      object.username,
-      object.email,
-      object.password,
-      object.admin,
-      object.created_at,
-      object.updated_at,
-      object.id
-    );
+class UserEntityAdapter {
+  static fromDb(object: Users): UserEntity {
+    const { username, email, password, admin, created_at, updated_at } = object;
+
+    const props: UserEntityProps = { username, email, password, admin, createdAt: created_at, updatedAt: updated_at };
+
+    return UserEntity.create(props, object.id);
   }
 }
 
