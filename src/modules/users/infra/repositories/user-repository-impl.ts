@@ -1,13 +1,16 @@
 
-import { CreateUserDTO } from "../../domain/dtos/CreateUserDTO";
+import { CreateUserDTO } from "../../domain/dtos/create-user-dto";
 import { UserEntity } from "../../domain/entities/UserEntity";
 import { IUserRepository } from "../../domain/repositories/i-user-repository";
 
 import { PrismaClientEnviroment } from "../../../../../prisma/PrismaClientEnviroment";
-import { UserEntityAdapter } from "../adapters/UserEntityAdapter";
 import { hash } from "bcryptjs";
+import { Maybe } from "src/core/logic/maybe";
+import { FindUserByUsernameOrEmailDTO } from "../../domain/dtos/find-user-dto";
+import { UserEntityAdapter } from "../adapters/UserEntityAdapter";
 
 class UserRepositoryImpl implements IUserRepository {
+
   private prisma = new PrismaClientEnviroment().prisma;
 
   async create(data: CreateUserDTO): Promise<void> {
@@ -18,16 +21,10 @@ class UserRepositoryImpl implements IUserRepository {
     await this.prisma.users.create({ data: { username, email, password: hashPassword } });
   }
 
-  async findById(id: string): Promise<UserEntity | null> {
-    const user = await this.prisma.users.findUnique({ where: { id } });
+  async findUserByUsernameOrEmail(data: FindUserByUsernameOrEmailDTO): Promise<Maybe<UserEntity>> {
+    const { username, email } = data;
 
-    if (!user) return null;
-
-    return UserEntityAdapter.fromDb(user);
-  }
-
-  async findByEmail(id: string): Promise<UserEntity | null> {
-    const user = await this.prisma.users.findFirst({ where: { id } });
+    const user = await this.prisma.users.findFirst({ where: { OR: [{ username, email }] } });
 
     if (!user) return null;
 
