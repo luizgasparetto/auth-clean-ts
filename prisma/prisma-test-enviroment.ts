@@ -1,9 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { Client } from "pg";
 
 import { v4 as uuid } from "uuid";
 
-export class PrismaClientEnviroment {
+export class PrismaTestEnviroment {
   private connectionString: string;
 
   constructor() {
@@ -16,10 +15,6 @@ export class PrismaClientEnviroment {
     const schema = `public_${uuid()}`;
 
     this.connectionString = `postgresql://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?schema=${schema}`;
-  }
-
-  get client() {
-    return new PrismaClient();
   }
 
   async query(query: string): Promise<void> {

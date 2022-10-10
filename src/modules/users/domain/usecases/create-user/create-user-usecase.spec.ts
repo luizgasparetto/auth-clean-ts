@@ -2,7 +2,7 @@ import { InMemoryUserRepository } from "../../../../../../tests/repositories/in-
 import { DomainError } from "../../../../../core/shared/errors/DomainError";
 
 import { CreateUserDTO } from "../../dtos/create-user-dto";
-import { UserEntity } from "../../entities/UserEntity";
+import { UserEntity } from "../../entities/user-entity";
 
 import { IUserRepository } from "../../repositories/i-user-repository";
 import { CreateUserUsecase } from "./create-user-usecase";
