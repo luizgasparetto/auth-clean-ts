@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from "uuid";
 import { hash } from "bcryptjs";
 
-import { PrismaClientEnviroment } from "../../../../prisma/PrismaClientEnviroment";
+import { PrismaClientEnviroment } from "../../../../prisma/prisma-client-enviroment";
 
 async function createAdmin(): Promise<void> {
   const connection = new PrismaClientEnviroment();

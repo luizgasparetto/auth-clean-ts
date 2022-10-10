@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { CreateUserUseCase } from "../../domain/usecases/createUser/create-user-usecase";
+import { CreateUserUsecase } from "../../domain/usecases/create-user/create-user-usecase";
 
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const createUserUsecase = container.resolve(CreateUserUseCase);
+    const createUserUsecase = container.resolve(CreateUserUsecase);
 
     await createUserUsecase.execute(request.body);
 

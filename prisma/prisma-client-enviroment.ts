@@ -18,7 +18,7 @@ export class PrismaClientEnviroment {
     this.connectionString = `postgresql://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?schema=${schema}`;
   }
 
-  get prisma() {
+  get client() {
     return new PrismaClient();
   }
 

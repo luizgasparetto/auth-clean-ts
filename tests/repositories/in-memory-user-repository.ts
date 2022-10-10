@@ -5,6 +5,7 @@ import { CreateUserDTO } from "../../src/modules/users/domain/dtos/create-user-d
 import { FindUserByUsernameOrEmailDTO } from "../../src/modules/users/domain/dtos/find-user-dto";
 import { UserEntity, UserEntityProps } from "../../src/modules/users/domain/entities/UserEntity";
 import { IUserRepository } from "../../src/modules/users/domain/repositories/i-user-repository";
+import { DeleteUserDTO } from "src/modules/users/domain/dtos/delete-user-dto";
 
 export class InMemoryUserRepository implements IUserRepository {
   private users: UserEntity[] = [];
@@ -23,6 +24,14 @@ export class InMemoryUserRepository implements IUserRepository {
     const user = UserEntity.create(props);
 
     this.users.push(user);
+  }
+
+  delete(data: DeleteUserDTO): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+
+  findUserById(id: string): Promise<Maybe<UserEntity>> {
+    throw new Error("Method not implemented.");
   }
 
   async findUserByUsernameOrEmail(data: FindUserByUsernameOrEmailDTO): Promise<Maybe<UserEntity>> {
