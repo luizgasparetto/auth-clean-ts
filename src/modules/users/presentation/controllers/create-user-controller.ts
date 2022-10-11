@@ -1,20 +1,24 @@
-import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { CreateUserUsecase } from "../../domain/usecases/create-user/create-user-usecase";
+import { HttpResponse } from "src/core/infra/types/http-response";
+import { Controller } from "src/core/shared/contracts/controller";
 
-class CreateUserController {
-  async handle(request: Request, response: Response): Promise<Response> {
+import { CreateUserUsecase } from "../../domain/usecases/create-user/create-user-usecase";
+import { CreateUserDTO } from "../../dtos/create-user-dto";
+
+export class CreateUserController implements Controller<CreateUserDTO> {
+  async handle(request: CreateUserDTO): Promise<HttpResponse> {
+    const { username, email, password } = request;
+
     const createUserUsecase = container.resolve(CreateUserUsecase);
 
-    const result = await createUserUsecase.execute(request.body);
+    const result = await createUserUsecase.execute({ username, email, password });
 
     if (result.isLeft()) {
-      return response.status(result.value.statusCode).json({ message: result.value.message });
+      return { statusCode: result.value.statusCode, body: { error: result.value.message } };
     }
 
-    return response.status(201).json({ message: 'User created successfully' });
+    return { statusCode: 200, body: { message: "User created successfully" } };
   }
 }
 
-export { CreateUserController };

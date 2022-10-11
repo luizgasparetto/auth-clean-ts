@@ -5,7 +5,7 @@ import cors from 'cors';
 
 import express from "express";
 
-import '../container';
+import '../injection';
 
 import { router } from './routes';
 
