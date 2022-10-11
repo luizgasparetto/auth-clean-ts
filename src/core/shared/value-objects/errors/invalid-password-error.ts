@@ -1,7 +1,7 @@
 import { ValueObjectError } from "../../errors/value-object-error";
 
-export class InvalidEmailError extends ValueObjectError {
+export class InvalidPasswordError extends ValueObjectError {
   constructor() {
-    super('Invalid email');
+    super("Invalid password");
   }
 }

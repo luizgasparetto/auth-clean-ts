@@ -10,7 +10,7 @@ class CreateUserController {
     const result = await createUserUsecase.execute(request.body);
 
     if (result.isLeft()) {
-      return response.status(result.value.statusCode).json({message: result.value.message});
+      return response.status(result.value.statusCode).json({ message: result.value.message });
     }
 
     return response.status(201).json({ message: 'User created successfully' });

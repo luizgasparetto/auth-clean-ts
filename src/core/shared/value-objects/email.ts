@@ -1,4 +1,4 @@
-import { Either, left, right } from "../../../core/logic/Either";
+import { Either, left, right } from "../logic/Either";
 
 import { InvalidEmailError } from "./errors/invalid-email-error";
 

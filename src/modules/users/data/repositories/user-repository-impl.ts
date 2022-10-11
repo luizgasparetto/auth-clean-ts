@@ -1,13 +1,10 @@
 import { hash } from "bcryptjs";
 
 import { prisma } from "../../../../core/infra/prisma/client";
-import { Maybe } from "../../../../core/logic/maybe";
+import { Maybe } from "../../../../core/shared/logic/maybe";
 
-import { CreateUserDTO } from "../../domain/dtos/create-user-dto";
-import { FindUserDTO } from "../../domain/dtos/find-user-dto";
 import { UserEntity } from "../../domain/entities/user-entity";
 import { IUserRepository } from "../../domain/repositories/i-user-repository";
-import { UserEntityAdapter } from "../adapters/user-entity-adapter";
 
 export class UserRepositoryImpl implements IUserRepository {
   async create(data: CreateUserDTO): Promise<UserEntity> {

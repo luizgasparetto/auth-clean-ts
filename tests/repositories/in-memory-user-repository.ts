@@ -1,11 +1,11 @@
 import { DomainError } from "../../src/core/shared/errors/domain-error";
-import { Maybe } from "../../src/core/logic/maybe";
+import { Maybe } from "../../src/core/shared/logic/maybe";
 
-import { CreateUserDTO } from "../../src/modules/users/domain/dtos/create-user-dto";
+import { CreateUserDTO } from "../../src/modules/users/application/dtos/create-user-dto";
 import { UserEntity, UserEntityProps } from "../../src/modules/users/domain/entities/user-entity";
 import { IUserRepository } from "../../src/modules/users/domain/repositories/i-user-repository";
 import { Email } from "../../src/core/shared/value-objects/email";
-import { FindUserDTO } from "../../src/modules/users/domain/dtos/find-user-dto";
+import { FindUserDTO } from "../../src/modules/users/application/dtos/find-user-dto";
 
 // TODO - Remove DomainError
 export class InMemoryUserRepository implements IUserRepository {
