@@ -1,6 +1,8 @@
 import { Either, left, right } from "../logic/Either";
 import { InvalidPasswordError } from "./errors/invalid-password-error";
 
+import { compare } from "bcryptjs";
+
 export class Password {
   private readonly password: string;
 
@@ -18,6 +20,10 @@ export class Password {
     const regex = RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$");
 
     return regex.test(password);
+  }
+
+  async comparePassword(password: string) {
+    return await compare(this.password, password);
   }
 
   static create(value: string): Either<InvalidPasswordError, Password> {

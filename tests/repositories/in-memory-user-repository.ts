@@ -1,12 +1,12 @@
 import { DomainError } from "../../src/core/shared/errors/domain-error";
 import { Maybe } from "../../src/core/shared/logic/maybe";
 
-import { UserEntity, UserEntityProps } from "../../src/modules/users/domain/entities/user-entity";
-import { IUserRepository } from "../../src/modules/users/domain/repositories/i-user-repository";
+import { UserEntity, UserEntityProps } from "../../src/modules/account/domain/entities/user-entity";
+import { IUserRepository } from "../../src/modules/account/domain/repositories/i-user-repository";
 import { Email } from "../../src/core/shared/value-objects/email";
 
-import { CreateUserDTO } from "../../src/modules/users/domain/dtos/create-user-dto";
-import { FindUserDTO } from "../../src/modules/users/domain/dtos/find-user-dto";
+import { CreateUserDTO } from "../../src/modules/account/domain/dtos/create-user-dto";
+import { FindUserDTO } from "../../src/modules/account/domain/dtos/find-user-dto";
 import { Password } from "src/core/shared/value-objects/password";
 
 // TODO - Remove DomainError
