@@ -1,5 +1,6 @@
 import { InMemoryUserRepository } from "../../../../../../tests/repositories/in-memory-user-repository";
-import { DomainError } from "../../../../../core/shared/errors/DomainError";
+
+import { DomainError } from "../../../../../core/shared/errors/domain-error";
 
 import { CreateUserDTO } from "../../dtos/create-user-dto";
 import { UserEntity } from "../../entities/user-entity";
@@ -21,7 +22,7 @@ describe('Create User Usecase', () => {
 
     await sut.execute(dto);
 
-    const user = await userRepository.findUserByUsernameOrEmail({ email: 'test' });
+    const user = await userRepository.create(dto);
 
     expect(user).toBeInstanceOf(UserEntity);
   });
@@ -32,7 +33,10 @@ describe('Create User Usecase', () => {
 
     await sut.execute(dto);
 
-    expect(() => sut.execute(dtoSameUsername)).rejects.toBeInstanceOf(DomainError);
+    const response = await sut.execute(dtoSameUsername);
+
+    expect(response.isLeft()).toBeTruthy();
+    expect(response.value).toBeInstanceOf(DomainError);
   });
 
   it('should throw a DomainError when try to create an User with same email', async () => {
@@ -41,6 +45,9 @@ describe('Create User Usecase', () => {
 
     await sut.execute(dto);
 
-    expect(() => sut.execute(dtoSameEmail)).rejects.toBeInstanceOf(DomainError);
+    const response = await sut.execute(dtoSameEmail);
+
+    expect(response.isLeft()).toBeTruthy();
+    expect(response.value).toBeInstanceOf(DomainError);
   });
 });

@@ -1,6 +1,7 @@
 import { hash } from "bcryptjs";
-import { prisma } from "src/core/infra/prisma/client";
-import { Maybe } from "src/core/logic/maybe";
+
+import { prisma } from "../../../../core/infra/prisma/client";
+import { Maybe } from "../../../../core/logic/maybe";
 
 import { CreateUserDTO } from "../../domain/dtos/create-user-dto";
 import { FindUserDTO } from "../../domain/dtos/find-user-dto";
@@ -26,7 +27,7 @@ export class UserRepositoryImpl implements IUserRepository {
   async findUser(data: FindUserDTO): Promise<Maybe<UserEntity>> {
     const { id, username, email } = data;
 
-    const user = await prisma.users.findFirst({ where: { OR: [{id}, { username}, { email} ] } });
+    const user = await prisma.users.findFirst({ where: { OR: [{ id }, { username }, { email }] } });
 
     if (!user) return null;
 

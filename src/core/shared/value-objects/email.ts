@@ -1,9 +1,7 @@
-import { Either, left, right } from "src/core/logic/Either";
-import { AppError } from "../errors/AppError";
-import { DomainError } from "../errors/DomainError";
+import { Either, left, right } from "../../../core/logic/Either";
 
+import { InvalidEmailError } from "./errors/invalid-email-error";
 
-// TODO - Add ValueObject abstract class and change DomainError to a ValueObjectError
 export class Email {
   private readonly email: string;
 
@@ -28,9 +26,9 @@ export class Email {
     return email.trim().toLowerCase();
   }
 
-  static create(value: string): Either<AppError, Email> {
+  static create(value: string): Either<InvalidEmailError, Email> {
     if (!this.isValid(value)) {
-      return left(new DomainError("Error"));
+      return left(new InvalidEmailError());
     }
 
     const formattedEmail = this.format(value);

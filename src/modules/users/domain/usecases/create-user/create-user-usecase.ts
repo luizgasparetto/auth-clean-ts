@@ -1,7 +1,7 @@
-import { Either, left, right } from "src/core/logic/either";
+import { Either, left, right } from "../../../../../core/logic/either";
 import { inject, injectable } from "tsyringe";
 
-import { DomainError } from "../../../../../core/shared/errors/DomainError";
+import { DomainError } from "../../../../../core/shared/errors/domain-error";
 import { CreateUserDTO } from "../../dtos/create-user-dto";
 import { UserEntity } from "../../entities/user-entity";
 import { InvalidEmailOrPasswordError } from "../../errors/invalid-email-or-password-error";
