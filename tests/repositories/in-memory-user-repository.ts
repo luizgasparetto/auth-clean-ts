@@ -5,8 +5,8 @@ import { UserEntity, UserEntityProps } from "../../src/modules/users/domain/enti
 import { IUserRepository } from "../../src/modules/users/domain/repositories/i-user-repository";
 import { Email } from "../../src/core/shared/value-objects/email";
 
-import { CreateUserDTO } from "../../src/modules/users/dtos/create-user-dto";
-import { FindUserDTO } from "../../src/modules/users/dtos/find-user-dto";
+import { CreateUserDTO } from "../../src/modules/users/domain/dtos/create-user-dto";
+import { FindUserDTO } from "../../src/modules/users/domain/dtos/find-user-dto";
 import { Password } from "src/core/shared/value-objects/password";
 
 // TODO - Remove DomainError

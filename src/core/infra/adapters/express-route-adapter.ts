@@ -9,11 +9,7 @@ export class ExpressRouteAdapter {
 
       const httpResponse = await controller.handle(requestData);
 
-      if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
-        return response.status(httpResponse.statusCode).json(httpResponse.body);
-      }
-
-      return response.status(httpResponse.statusCode).json({ error: httpResponse.body });
+      return response.status(httpResponse.statusCode).json(httpResponse.body);
     }
   }
 }

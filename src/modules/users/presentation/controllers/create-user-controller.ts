@@ -4,7 +4,7 @@ import { HttpResponse } from "src/core/infra/types/http-response";
 import { Controller } from "src/core/shared/contracts/controller";
 
 import { CreateUserUsecase } from "../../domain/usecases/create-user/create-user-usecase";
-import { CreateUserDTO } from "../../dtos/create-user-dto";
+import { CreateUserDTO } from "../../domain/dtos/create-user-dto";
 
 export class CreateUserController implements Controller<CreateUserDTO> {
   async handle(request: CreateUserDTO): Promise<HttpResponse> {
@@ -21,4 +21,3 @@ export class CreateUserController implements Controller<CreateUserDTO> {
     return { statusCode: 200, body: { message: "User created successfully" } };
   }
 }
-

@@ -1,7 +1,7 @@
 import { Maybe } from "../../../../core/shared/logic/maybe";
 
-import { CreateUserDTO } from "../../dtos/create-user-dto";
-import { FindUserDTO } from "../../dtos/find-user-dto";
+import { CreateUserDTO } from "../dtos/create-user-dto";
+import { FindUserDTO } from "../dtos/find-user-dto";
 
 import { UserEntity } from "../entities/user-entity";
 

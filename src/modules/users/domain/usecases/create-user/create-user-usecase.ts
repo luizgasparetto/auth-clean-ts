@@ -8,7 +8,7 @@ import { UserAlreadyExistsError } from "../../errors/user-already-exists-error";
 import { IUserRepository } from "../../repositories/i-user-repository";
 import { Email } from "../../../../../core/shared/value-objects/email";
 
-import { CreateUserDTO } from "../../../dtos/create-user-dto";
+import { CreateUserDTO } from "../../dtos/create-user-dto";
 import { Password } from "src/core/shared/value-objects/password";
 
 @injectable()
