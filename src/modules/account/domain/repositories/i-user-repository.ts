@@ -1,9 +1,9 @@
-import { Maybe } from "../../../../core/logic/maybe";
+import { Maybe } from "../../../../core/shared/logic/maybe";
 
 import { CreateUserDTO } from "../dtos/create-user-dto";
+import { FindUserDTO } from "../dtos/find-user-dto";
 
 import { UserEntity } from "../entities/user-entity";
-import { FindUserDTO } from "../dtos/find-user-dto";
 
 interface IUserRepository {
   create(data: CreateUserDTO): Promise<UserEntity>;

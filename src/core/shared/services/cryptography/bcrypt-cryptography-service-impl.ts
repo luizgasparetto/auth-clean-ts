@@ -8,4 +8,8 @@ export class BCryptCryptographyServiceImpl implements ICryptographyService {
   async hash(plaintext: string): Promise<string> {
     return await bcrypt.hash(plaintext, this.salt);
   }
+
+  async compare(plaintext: string, value: string): Promise<boolean> {
+    return await bcrypt.compare(plaintext, value);
+  }
 }
