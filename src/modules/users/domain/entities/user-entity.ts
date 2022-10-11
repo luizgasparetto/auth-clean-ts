@@ -1,9 +1,10 @@
-import { Entity } from "../../../../core/shared/contracts/Entity";
+import { Email } from "../../../../core/shared/value-objects/email";
+import { Entity } from "../../../../core/shared/contracts/entity";
 
 export type UserEntityProps = {
   id?: string;
   username: string;
-  email: string;
+  email: Email;
   admin: boolean
   password: string;
   createdAt: Date;

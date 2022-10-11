@@ -6,10 +6,10 @@ import cors from 'cors';
 
 import express, { Request, Response, NextFunction } from "express";
 
-import './core/container';
+import '../container';
 
-import { router } from './core/shared/routes';
-import { AppError } from './core/shared/errors/AppError';
+import { router } from './routes';
+import { AppError } from '../../shared/errors/AppError';
 
 const app = express();
 
@@ -26,4 +26,4 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
   return response.status(500).json({ message: "Internal Server Error", error: err.message });
 });
 
-app.listen(process.env.HTTP_PORT, () => console.log("Server is running..."));
+export { app };

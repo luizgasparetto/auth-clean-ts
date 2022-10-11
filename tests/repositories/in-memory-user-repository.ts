@@ -3,7 +3,7 @@ import { Maybe } from "../../src/core/logic/maybe";
 
 import { CreateUserDTO } from "../../src/modules/users/domain/dtos/create-user-dto";
 import { FindUserByUsernameOrEmailDTO } from "../../src/modules/users/domain/dtos/find-user-dto";
-import { UserEntity, UserEntityProps } from "../../src/modules/users/domain/entities/UserEntity";
+import { UserEntity, UserEntityProps } from "../../src/modules/users/domain/entities/user-entity";
 import { IUserRepository } from "../../src/modules/users/domain/repositories/i-user-repository";
 import { DeleteUserDTO } from "src/modules/users/domain/dtos/delete-user-dto";
 

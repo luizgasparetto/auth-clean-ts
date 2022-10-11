@@ -1,12 +1,16 @@
 import { Either, left, right } from "src/core/logic/either";
-import { AppError } from "src/core/shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
 
 import { DomainError } from "../../../../../core/shared/errors/DomainError";
 import { CreateUserDTO } from "../../dtos/create-user-dto";
-import { UserEntity } from "../../entities/UserEntity";
+import { UserEntity } from "../../entities/user-entity";
+import { InvalidEmailOrPasswordError } from "../../errors/invalid-email-or-password-error";
+import { UserAlreadyExistsError } from "../../errors/user-already-exists-error";
 import { IUserRepository } from "../../repositories/i-user-repository";
+import { Email } from "../../../../../core/shared/value-objects/email";
 
+
+// TODO -  Make password validation with ValueObject
 @injectable()
 class CreateUserUsecase {
   constructor(
@@ -14,18 +18,24 @@ class CreateUserUsecase {
     private userRepository: IUserRepository
   ) { }
 
-  async execute(data: CreateUserDTO): Promise<Either<AppError, UserEntity>> {
+  async execute(data: CreateUserDTO): Promise<Either<DomainError, UserEntity>> {
     const { username, email } = data;
 
     const userAlreadyExists = await this.userRepository.findUser({ username, email });
 
     if (userAlreadyExists instanceof UserEntity) {
-      return left(new DomainError("User already exists", 400));
+      return left(new UserAlreadyExistsError());
+    }
+
+    const isEmailValid = Email.isValid(email);
+
+    if (!isEmailValid) {
+      return left(new InvalidEmailOrPasswordError());
     }
 
     const result = await this.userRepository.create(data);
 
-    return result.isLeft() ? left(result.value) : right(result.value);
+    return right(result);
   }
 }
 
