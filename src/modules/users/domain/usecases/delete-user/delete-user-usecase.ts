@@ -1,7 +1,6 @@
-import { DomainError } from "src/core/shared/errors/DomainError";
+import { DomainError } from "../../../../../core/shared/errors/domain-error";
 import { inject, injectable } from "tsyringe";
 
-import { DeleteUserDTO } from "../../dtos/delete-user-dto";
 import { IUserRepository } from "../../repositories/i-user-repository";
 
 @injectable()
@@ -11,15 +10,13 @@ export class DeleteUserUsecase {
     private userRepository: IUserRepository
   ) { }
 
-  async execute(data: DeleteUserDTO): Promise<void> {
-    const { id } = data;
-
-    const user = await this.userRepository.findUserById(id);
+  async execute(id: string): Promise<void> {
+    const user = await this.userRepository.findUser({ id });
 
     if (user === null || user === undefined) {
       throw new DomainError("User doesn't exists");
     }
 
-    await this.userRepository.delete({ id });
+    await this.userRepository.delete(id);
   }
 }
