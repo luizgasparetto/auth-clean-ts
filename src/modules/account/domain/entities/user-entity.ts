@@ -1,6 +1,6 @@
 import { Email } from "../../../../core/shared/value-objects/email";
 import { Entity } from "../../../../core/shared/contracts/entity";
-import { Password } from "src/core/shared/value-objects/password";
+import { Password } from "../../../../core/shared/value-objects/password";
 
 export type UserEntityProps = {
   id?: string;

@@ -1,4 +1,4 @@
-import { Controller } from "src/core/shared/contracts/controller";
+import { Controller } from "../../shared/contracts/controller";
 
 import { Request, Response } from "express";
 

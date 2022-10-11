@@ -1,3 +1,5 @@
+// TODO -  Implement tearDown on PrismaTestEnviroment to use on E2E
+
 import { Client } from "pg";
 
 import { v4 as uuid } from "uuid";

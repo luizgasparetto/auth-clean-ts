@@ -6,6 +6,7 @@ import { JWTAuthService } from "src/core/shared/services/auth/jwt-auth-service";
 
 import { InvalidEmailOrPasswordError } from "../../errors/invalid-email-or-password-error";
 import { IUserRepository } from "../../repositories/i-user-repository";
+import { BCryptCryptographyServiceImpl } from "src/core/shared/services/cryptography/bcrypt-cryptography-service-impl";
 
 type IRequest = {
   email: string;
@@ -17,7 +18,7 @@ type TokenResponse = {
 }
 
 @injectable()
-export class AuthenticateUserUsecase {
+export class AuthenticateUsecase {
   constructor(
     @inject("UserRepository")
     private userRepository: IUserRepository
@@ -30,7 +31,7 @@ export class AuthenticateUserUsecase {
       return left(new InvalidEmailOrPasswordError());
     }
 
-    const isPasswordValid = 
+    const isPasswordValid = new BCryptCryptographyServiceImpl().compare(user.props.password.value, password);
 
     if (!isPasswordValid) {
       return left(new InvalidEmailOrPasswordError());
