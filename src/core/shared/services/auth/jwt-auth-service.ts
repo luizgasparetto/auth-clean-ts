@@ -9,7 +9,7 @@ export type JWTAuthResponse = {
 
 export class JWTAuthService {
   static auth(user: UserEntity): JWTAuthResponse {
-    const token = sign({}, "", { subject: user.id, expiresIn: '1d' });
+    const token = sign({}, process.env.AUTH_KEY as string, { subject: user.id, expiresIn: '1d' });
 
     return { user_id: user.id, token };
   }

@@ -13,7 +13,9 @@ export class AuthenticateController implements Controller<IRequest> {
     private authenticateUsecase: AuthenticateUsecase
   ) { }
 
-  async handle({ email, password }: IRequest): Promise<HttpResponse> {
+  async handle(request: IRequest): Promise<HttpResponse> {
+    const { email, password } = request;
+
     const response = await this.authenticateUsecase.execute({ email, password });
 
     if (response.isLeft()) {
