@@ -1,16 +1,16 @@
 import { HttpResponse } from "../../../../core/infra/protocols/http_response";
 import { Controller } from "../../../../core/shared/contracts/controller";
 
-import { AuthenticateUsecase } from "../../domain/usecases/authenticate/authenticate-usecase";
+import { AuthenticateAccountUsecase } from "../../domain/usecases/authenticateAccount/authenticate-account-usecase";
 
 type IRequest = {
   email: string;
   password: string;
 }
 
-export class AuthenticateController implements Controller<IRequest> {
+export class AuthenticateAccountController implements Controller<IRequest> {
   constructor(
-    private authenticateUsecase: AuthenticateUsecase
+    private authenticateUsecase: AuthenticateAccountUsecase
   ) { }
 
   async handle(request: IRequest): Promise<HttpResponse> {

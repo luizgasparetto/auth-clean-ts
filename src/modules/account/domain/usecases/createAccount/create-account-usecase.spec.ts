@@ -1,11 +1,11 @@
-import { InMemoryUserRepository } from "../../../../../../tests/repositories/in-memory-user-repository";
+import { InMemoryUserRepository } from "../../../../../../tests/repositories/in-memory-account-repository";
 
 import { DomainError } from "../../../../../core/shared/errors/domain-error";
 
 import { CreateUserDTO } from "../../dtos/create-user-dto";
 import { UserEntity } from "../../entities/user-entity";
 
-import { IUserRepository } from "../../repositories/i-user-repository";
+import { IUserRepository } from "../../repositories/i-account-repository";
 import { CreateAccountUsecase } from "./create-account-usecase";
 
 describe('Create User Usecase', () => {

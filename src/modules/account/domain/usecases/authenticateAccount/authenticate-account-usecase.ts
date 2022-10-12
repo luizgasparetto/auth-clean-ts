@@ -4,7 +4,7 @@ import { Either, left, right } from "../../../../../core/shared/logic/Either";
 import { JWTAuthService } from "../../../../../core/shared/services/auth/jwt-auth-service";
 
 import { InvalidEmailOrPasswordError } from "../../errors/invalid-email-or-password-error";
-import { IUserRepository } from "../../repositories/i-user-repository";
+import { IUserRepository } from "../../repositories/i-account-repository";
 import { BCryptCryptographyServiceImpl } from "../../../../../core/shared/services/cryptography/bcrypt-cryptography-service-impl";
 import { compare } from "bcryptjs";
 import { ICryptographyService } from "src/core/shared/services/cryptography/i-cryptography-service";
@@ -18,7 +18,7 @@ type TokenResponse = {
   token: string;
 }
 
-export class AuthenticateUsecase {
+export class AuthenticateAccountUsecase {
   constructor(
     private userRepository: IUserRepository,
     private cryptographyService: ICryptographyService

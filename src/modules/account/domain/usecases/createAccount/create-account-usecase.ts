@@ -4,7 +4,7 @@ import { DomainError } from "../../../../../core/shared/errors/domain-error";
 import { UserEntity } from "../../entities/user-entity";
 import { InvalidEmailOrPasswordError } from "../../errors/invalid-email-or-password-error";
 import { UserAlreadyExistsError } from "../../errors/user-already-exists-error";
-import { IUserRepository } from "../../repositories/i-user-repository";
+import { IUserRepository } from "../../repositories/i-account-repository";
 import { Email } from "../../../../../core/shared/value-objects/email";
 
 import { CreateUserDTO } from "../../dtos/create-user-dto";

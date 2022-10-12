@@ -5,10 +5,8 @@ import { FindUserDTO } from "../dtos/find-user-dto";
 
 import { UserEntity } from "../entities/user-entity";
 
-interface IUserRepository {
+export interface IAccountRepository {
   create(data: CreateUserDTO): Promise<UserEntity>;
   delete(id: string): Promise<void>;
   findUser(data: FindUserDTO): Promise<Maybe<UserEntity>>;
 }
-
-export { IUserRepository };

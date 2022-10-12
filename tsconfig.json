@@ -20,15 +20,6 @@
     //   "@core/*": [
     //     "./src/core/*"
     //   ],
-    //   "@application/*": [
-    //     "src/application/*"
-    //   ],
-    //   "@domain/*": [
-    //     "./src/domain/*"
-    //   ],
-    //   "@infra/*": [
-    //     "./src/infra/*"
-    //   ],
     //   "@test/*": [
     //     "./test/*"
     //   ]

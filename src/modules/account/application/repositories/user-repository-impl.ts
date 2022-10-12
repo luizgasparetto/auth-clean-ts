@@ -5,12 +5,12 @@ import { CreateUserDTO } from "../../domain/dtos/create-user-dto";
 import { FindUserDTO } from "../../domain/dtos/find-user-dto";
 
 import { UserEntity } from "../../domain/entities/user-entity";
-import { IUserRepository } from "../../domain/repositories/i-user-repository";
+import { IAccountRepository } from "../../domain/repositories/i-account-repository";
 import { UserEntityMapper } from "../mappers/user-entity-mapper";
 
 import { BCryptCryptographyServiceImpl } from "../../../../core/shared/services/cryptography/bcrypt-cryptography-service-impl";
 
-export class UserRepositoryImpl implements IUserRepository {
+export class AccountRepositoryImpl implements IAccountRepository {
   async create(data: CreateUserDTO): Promise<UserEntity> {
     const { username, email, password } = data;
 
