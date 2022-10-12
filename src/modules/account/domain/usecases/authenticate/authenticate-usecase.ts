@@ -6,6 +6,8 @@ import { JWTAuthService } from "../../../../../core/shared/services/auth/jwt-aut
 import { InvalidEmailOrPasswordError } from "../../errors/invalid-email-or-password-error";
 import { IUserRepository } from "../../repositories/i-user-repository";
 import { BCryptCryptographyServiceImpl } from "../../../../../core/shared/services/cryptography/bcrypt-cryptography-service-impl";
+import { compare } from "bcryptjs";
+import { ICryptographyService } from "src/core/shared/services/cryptography/i-cryptography-service";
 
 type IRequest = {
   email: string;
@@ -18,7 +20,8 @@ type TokenResponse = {
 
 export class AuthenticateUsecase {
   constructor(
-    private userRepository: IUserRepository
+    private userRepository: IUserRepository,
+    private cryptographyService: ICryptographyService
   ) { }
 
   async execute({ email, password }: IRequest): Promise<Either<DomainError, TokenResponse>> {
@@ -28,7 +31,7 @@ export class AuthenticateUsecase {
       return left(new InvalidEmailOrPasswordError());
     }
 
-    const isPasswordValid = new BCryptCryptographyServiceImpl().compare(user.props.password.value, password);
+    const isPasswordValid = await this.cryptographyService.compare(password, user.props.password.value);
 
     if (!isPasswordValid) {
       return left(new InvalidEmailOrPasswordError());

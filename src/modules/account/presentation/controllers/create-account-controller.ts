@@ -1,5 +1,5 @@
 import { Controller } from "../../../../core/shared/contracts/controller";
-import { HttpResponse } from "../../../../core/infra/adapters/http_response";
+import { HttpResponse } from "../../../../core/infra/protocols/http_response";
 
 import { CreateAccountUsecase } from "../../domain/usecases/create-user/create-account-usecase";
 import { CreateUserDTO } from "../../domain/dtos/create-user-dto";

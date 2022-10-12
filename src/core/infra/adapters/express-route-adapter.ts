@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 export class ExpressRouteAdapter {
   static adapt(controller: Controller) {
     return async (request: Request, response: Response) => {
-      const requestData = { ...request.body, ...request.params, ...request.query };
+      const requestData = { ...request.body, ...request.params, ...request.query, user_id: request.user_id };
 
       const httpResponse = await controller.handle(requestData);
 

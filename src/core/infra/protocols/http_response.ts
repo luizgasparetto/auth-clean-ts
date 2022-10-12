@@ -22,4 +22,8 @@ export class HttpResponse {
   static unauthorized(body: any): HttpResponse {
     return new HttpResponse(body, 401);
   }
+
+  static forbidden(body: any): HttpResponse {
+    return new HttpResponse(body, 403);
+  }
 }
