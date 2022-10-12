@@ -1,12 +1,13 @@
 name: TurnPro CI
 
-on: [pull_request]
+on:
+  pull_request:
 
 jobs:
   build:
     name: Run Unit Tests
-    runs-on: ubuntu-latest
 
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -15,12 +16,12 @@ jobs:
           fetch_depth: 0
 
       - name: Setup Node
-        uses: actions@setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
       
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+      - name: Install Dependencies
+        run: yarn
 
-      - name: Run Tests
+      - name: Tests
         run: yarn test
