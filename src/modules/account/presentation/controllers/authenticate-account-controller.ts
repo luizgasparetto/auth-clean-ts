@@ -1,7 +1,7 @@
 import { HttpResponse } from "../../../../core/infra/protocols/http_response";
 import { Controller } from "../../../../core/shared/contracts/controller";
 
-import { AuthenticateAccountUsecase } from "../../domain/usecases/authenticateAccount/authenticate-account-usecase";
+import { AuthenticateAccountUsecase } from "../../domain/usecases/authenticate-account-usecase";
 
 type IRequest = {
   email: string;

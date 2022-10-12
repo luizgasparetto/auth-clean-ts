@@ -1,7 +1,7 @@
 import { HttpResponse } from "../../../../core/infra/protocols/http_response";
 import { Controller } from "../../../../core/shared/contracts/controller";
 
-import { DeleteAccountUsecase } from "../../domain/usecases/deleteAccount/delete-account-usecase";
+import { DeleteAccountUsecase } from "../../domain/usecases/delete-account-usecase";
 
 type IRequest = {
   user_id: string;

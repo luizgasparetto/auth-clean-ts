@@ -1,12 +1,10 @@
 import { DomainError } from "src/core/shared/errors/domain-error";
 
-import { Either, left, right } from "../../../../../core/shared/logic/Either";
-import { JWTAuthService } from "../../../../../core/shared/services/auth/jwt-auth-service";
+import { Either, left, right } from "../../../../core/shared/logic/Either";
+import { JWTAuthService } from "../../../../core/shared/services/auth/jwt-auth-service";
 
-import { InvalidEmailOrPasswordError } from "../../errors/invalid-email-or-password-error";
-import { IUserRepository } from "../../repositories/i-account-repository";
-import { BCryptCryptographyServiceImpl } from "../../../../../core/shared/services/cryptography/bcrypt-cryptography-service-impl";
-import { compare } from "bcryptjs";
+import { InvalidEmailOrPasswordError } from "../errors/invalid-email-or-password-error";
+import { IAccountRepository } from "../repositories/i-account-repository";
 import { ICryptographyService } from "src/core/shared/services/cryptography/i-cryptography-service";
 
 type IRequest = {
@@ -20,7 +18,7 @@ type TokenResponse = {
 
 export class AuthenticateAccountUsecase {
   constructor(
-    private userRepository: IUserRepository,
+    private userRepository: IAccountRepository,
     private cryptographyService: ICryptographyService
   ) { }
 

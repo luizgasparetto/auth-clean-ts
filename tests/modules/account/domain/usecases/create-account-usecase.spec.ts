@@ -1,19 +1,20 @@
-import { InMemoryUserRepository } from "../../../../../../tests/repositories/in-memory-account-repository";
 
-import { DomainError } from "../../../../../core/shared/errors/domain-error";
+import { DomainError } from "../../../../../src/core/shared/errors/domain-error";
 
-import { CreateUserDTO } from "../../dtos/create-user-dto";
-import { UserEntity } from "../../entities/user-entity";
+import { CreateUserDTO } from "../../../../../src/modules/account/domain/dtos/create-user-dto";
+import { UserEntity } from "../../../../../src/modules/account/domain/entities/user-entity";
 
-import { IUserRepository } from "../../repositories/i-account-repository";
-import { CreateAccountUsecase } from "./create-account-usecase";
+import { CreateAccountUsecase } from "../../../../../src/modules/account/domain/usecases/create-account-usecase";
+
+import { IAccountRepository } from "../../../../../src/modules/account/domain/repositories/i-account-repository";
+import { InMemoryAccountRepository } from "../../application/repositories/in-memory-account-repository";
 
 describe('Create User Usecase', () => {
-  let userRepository: IUserRepository;
+  let userRepository: IAccountRepository;
   let sut: CreateAccountUsecase;
 
   beforeEach(() => {
-    userRepository = new InMemoryUserRepository();
+    userRepository = new InMemoryAccountRepository();
     sut = new CreateAccountUsecase(userRepository);
   });
 

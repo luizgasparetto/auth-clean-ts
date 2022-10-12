@@ -6,7 +6,7 @@ export default {
   coverageProvider: "v8",
   coverageReporters: ["text-summary", "lcov"],
   preset: 'ts-jest',
-  roots: ['<rootDir>/src'],
+  roots: ['<rootDir>/tests'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: "node",
   testMatch: ["**/*.spec.ts"],

@@ -1,13 +1,13 @@
-import { DomainError } from "../../src/core/shared/errors/domain-error";
-import { Maybe } from "../../src/core/shared/logic/maybe";
+import { DomainError } from "../../../../../src/core/shared/errors/domain-error";
+import { Maybe } from "../../../../../src/core/shared/logic/maybe";
 
-import { UserEntity, UserEntityProps } from "../../src/modules/account/domain/entities/user-entity";
-import { IAccountRepository } from "../../src/modules/account/domain/repositories/i-account-repository";
-import { Email } from "../../src/core/shared/value-objects/email";
+import { UserEntity, UserEntityProps } from "../../../../../src/modules/account/domain/entities/user-entity";
+import { IAccountRepository } from "../../../../../src/modules/account/domain/repositories/i-account-repository";
+import { Email } from "../../../../../src/core/shared/value-objects/email";
 
-import { CreateUserDTO } from "../../src/modules/account/domain/dtos/create-user-dto";
-import { FindUserDTO } from "../../src/modules/account/domain/dtos/find-user-dto";
-import { Password } from "../../src/core/shared/value-objects/password";
+import { CreateUserDTO } from "../../../../../src/modules/account/domain/dtos/create-user-dto";
+import { FindUserDTO } from "../../../../../src/modules/account/domain/dtos/find-user-dto";
+import { Password } from "../../../../../src/core/shared/value-objects/password";
 
 // TODO - Remove DomainError
 export class InMemoryAccountRepository implements IAccountRepository {
