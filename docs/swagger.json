@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "TurnPro Documentation",
-    "description": "This is an API Documentation",
+    "description": "This is the TurnPro API Documentation, an API that's will be used on our MobileApp, fell free to contact us if you have any advice or idea",
     "version": "1.0.0",
     "contact": {
       "email": "luizegasp@gmail.com"
@@ -17,6 +17,7 @@
         "summary": "Create an account",
         "description": "Create a new account",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -49,16 +50,37 @@
             "description": "Account already exists"
           }
         }
-      }
-    },
-    "/account/auth": {
-      "post": {
+      },
+      "delete": {
         "tags": [
           "Account"
+        ],
+        "summary": "Delete an account",
+        "description": "Delete an existent account",
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account deleted successfully"
+          },
+          "400": {
+            "description": "User doesn't exists / is not authenticated"
+          }
+        }
+      }
+    },
+    "/session": {
+      "post": {
+        "tags": [
+          "Session"
         ],
         "summary": "Auth an account",
         "description": "Authenticate a existent account",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -81,22 +103,21 @@
         },
         "responses": {
           "200": {
-            "description": "Returns your token",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "accessToken": "xxxxxxxxxx"
-                  }
-                }
-              }
-            }
+            "description": "Returns your token"
           },
           "400": {
             "description": "Account doesn't exists"
           }
         }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "auth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-access-token"
       }
     }
   }

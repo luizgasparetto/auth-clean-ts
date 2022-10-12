@@ -4,6 +4,7 @@ import { Client } from "pg";
 
 import { v4 as uuid } from "uuid";
 
+
 export class PrismaTestEnviroment {
   private connectionString: string;
 
@@ -17,6 +18,11 @@ export class PrismaTestEnviroment {
     const schema = `public_${uuid()}`;
 
     this.connectionString = `postgresql://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?schema=${schema}`;
+  }
+
+  async setup() {
+    process.env.DATABASE_URL = this.connectionString;
+    //this.global.process.env.DATABASE_URL = this.connectionString;
   }
 
   async query(query: string): Promise<void> {
