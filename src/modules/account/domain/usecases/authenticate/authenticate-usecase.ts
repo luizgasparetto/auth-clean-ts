@@ -1,12 +1,11 @@
-import { inject, injectable } from "tsyringe";
-
 import { DomainError } from "src/core/shared/errors/domain-error";
-import { Either, left, right } from "src/core/shared/logic/Either";
-import { JWTAuthService } from "src/core/shared/services/auth/jwt-auth-service";
+
+import { Either, left, right } from "../../../../../core/shared/logic/Either";
+import { JWTAuthService } from "../../../../../core/shared/services/auth/jwt-auth-service";
 
 import { InvalidEmailOrPasswordError } from "../../errors/invalid-email-or-password-error";
 import { IUserRepository } from "../../repositories/i-user-repository";
-import { BCryptCryptographyServiceImpl } from "src/core/shared/services/cryptography/bcrypt-cryptography-service-impl";
+import { BCryptCryptographyServiceImpl } from "../../../../../core/shared/services/cryptography/bcrypt-cryptography-service-impl";
 
 type IRequest = {
   email: string;
@@ -17,10 +16,8 @@ type TokenResponse = {
   token: string;
 }
 
-@injectable()
 export class AuthenticateUsecase {
   constructor(
-    @inject("UserRepository")
     private userRepository: IUserRepository
   ) { }
 

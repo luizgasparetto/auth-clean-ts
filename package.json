@@ -10,7 +10,6 @@
     "test": "jest --runInBand --detectOpenHandles --no-cache",
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.config.ts",
-    "prepare": "husky install",
     "seed:admin": "ts-node-dev src/core/shared/seeds/admin_seed.ts"
   },
   "dependencies": {
@@ -23,7 +22,6 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
-    "tsyringe": "^4.7.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

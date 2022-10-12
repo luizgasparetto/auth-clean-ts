@@ -6,15 +6,15 @@ import { CreateUserDTO } from "../../dtos/create-user-dto";
 import { UserEntity } from "../../entities/user-entity";
 
 import { IUserRepository } from "../../repositories/i-user-repository";
-import { CreateUserUsecase } from "./create-user-usecase";
+import { CreateAccountUsecase } from "./create-account-usecase";
 
 describe('Create User Usecase', () => {
   let userRepository: IUserRepository;
-  let sut: CreateUserUsecase;
+  let sut: CreateAccountUsecase;
 
   beforeEach(() => {
     userRepository = new InMemoryUserRepository();
-    sut = new CreateUserUsecase(userRepository);
+    sut = new CreateAccountUsecase(userRepository);
   });
 
   it('should be able to create a new user', async () => {

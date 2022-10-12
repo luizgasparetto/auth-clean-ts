@@ -1,8 +1,5 @@
 import { Either, left, right } from "../../../../../core/shared/logic/either";
 
-// TODO - Remove tsyringe and implement factories
-import { inject, injectable } from "tsyringe";
-
 import { DomainError } from "../../../../../core/shared/errors/domain-error";
 import { UserEntity } from "../../entities/user-entity";
 import { InvalidEmailOrPasswordError } from "../../errors/invalid-email-or-password-error";
@@ -13,10 +10,8 @@ import { Email } from "../../../../../core/shared/value-objects/email";
 import { CreateUserDTO } from "../../dtos/create-user-dto";
 import { Password } from "../../../../../core/shared/value-objects/password";
 
-@injectable()
-class CreateUserUsecase {
+export class CreateAccountUsecase {
   constructor(
-    @inject("UserRepository")
     private userRepository: IUserRepository
   ) { }
 
@@ -37,16 +32,12 @@ class CreateUserUsecase {
 
     const isPasswordValid = Password.isValid(password);
 
-    // TODO - Verificar validação da senha
-
-    // if (!isPasswordValid) {
-    //   return left(new InvalidEmailOrPasswordError());
-    // }
+    if (!isPasswordValid) {
+      return left(new InvalidEmailOrPasswordError());
+    }
 
     const result = await this.userRepository.create(data);
 
     return right(result);
   }
 }
-
-export { CreateUserUsecase };

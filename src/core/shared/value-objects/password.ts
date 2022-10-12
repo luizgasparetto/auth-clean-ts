@@ -15,11 +15,9 @@ export class Password {
   }
 
   static isValid(password: string) {
-    if (!password || password.length < 8) return false;
+    if (!password || password.length < 8 || password.length > 255) return false;
 
-    const regex = RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$");
-
-    return regex.test(password);
+    return true;
   }
 
   async comparePassword(password: string) {

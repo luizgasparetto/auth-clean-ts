@@ -1,18 +1,20 @@
-import { container } from "tsyringe";
-
 import { Controller } from "../../../../core/shared/contracts/controller";
-
-import { CreateUserUsecase } from "../../domain/usecases/create-user/create-user-usecase";
-import { CreateUserDTO } from "../../domain/dtos/create-user-dto";
 import { HttpResponse } from "../../../../core/infra/adapters/http_response";
 
-export class CreateUserController implements Controller<CreateUserDTO> {
+import { CreateAccountUsecase } from "../../domain/usecases/create-user/create-account-usecase";
+import { CreateUserDTO } from "../../domain/dtos/create-user-dto";
+
+
+export class CreateAccountController implements Controller<CreateUserDTO> {
+
+  constructor(
+    private createAccountUsecase: CreateAccountUsecase
+  ) { }
+
   async handle(request: CreateUserDTO): Promise<HttpResponse> {
     const { username, email, password } = request;
 
-    const createUserUsecase = container.resolve(CreateUserUsecase);
-
-    const result = await createUserUsecase.execute({ username, email, password });
+    const result = await this.createAccountUsecase.execute({ username, email, password });
 
     if (result.isLeft()) {
       return HttpResponse.badRequest({ error: result.value.message });

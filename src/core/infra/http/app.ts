@@ -5,8 +5,6 @@ import cors from 'cors';
 
 import express from "express";
 
-import '../injection';
-
 import { router } from './routes';
 
 const app = express();
