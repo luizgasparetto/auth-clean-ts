@@ -1,0 +1,103 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TurnPro Documentation",
+    "description": "This is an API Documentation",
+    "version": "1.0.0",
+    "contact": {
+      "email": "luizegasp@gmail.com"
+    }
+  },
+  "paths": {
+    "/account": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Create an account",
+        "description": "Create a new account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "username": "account_username",
+                  "email": "account@email.com",
+                  "password": "1345742F"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Account created successfully"
+          },
+          "400": {
+            "description": "Account already exists"
+          }
+        }
+      }
+    },
+    "/account/auth": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Auth an account",
+        "description": "Authenticate a existent account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "account@email.com",
+                  "password": "1345742F"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns your token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": "xxxxxxxxxx"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Account doesn't exists"
+          }
+        }
+      }
+    }
+  }
+}
