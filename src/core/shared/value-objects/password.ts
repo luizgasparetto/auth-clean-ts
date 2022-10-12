@@ -14,7 +14,7 @@ export class Password {
     return this.password;
   }
 
-  static isValid(password: string) {
+  static isValid(password?: string) {
     if (!password || password.length < 8 || password.length > 255) return false;
 
     return true;
@@ -24,11 +24,11 @@ export class Password {
     return await compare(this.password, password);
   }
 
-  static create(value: string): Either<InvalidPasswordError, Password> {
+  static create(value?: string): Either<InvalidPasswordError, Password> {
     if (!this.isValid(value)) {
       return left(new InvalidPasswordError());
     }
 
-    return right(new Password(value));
+    return right(new Password(value!));
   }
 }

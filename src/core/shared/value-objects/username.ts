@@ -12,7 +12,7 @@ export class Username {
     return this.username;
   }
 
-  static isValid(username: string) {
+  static isValid(username?: string) {
     if (!username || username.trim().length > 17) return false;
   }
 
@@ -20,12 +20,12 @@ export class Username {
     return username.trim();
   }
 
-  static create(value: string): Either<InvalidUsernameError, Username> {
+  static create(value?: string): Either<InvalidUsernameError, Username> {
     if (!this.isValid(value)) {
       return left(new InvalidUsernameError());
     }
 
-    const formattedUsername = this.format(value);
+    const formattedUsername = this.format(value!);
 
     return right(new Username(formattedUsername));
   }

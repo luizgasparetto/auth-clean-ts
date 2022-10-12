@@ -13,7 +13,7 @@ export class Email {
     return this.email;
   }
 
-  static isValid(email: string) {
+  static isValid(email?: string) {
     if (!email || email.trim().length > 255) return false;
 
     const regex =
@@ -26,12 +26,12 @@ export class Email {
     return email.trim().toLowerCase();
   }
 
-  static create(value: string): Either<InvalidEmailError, Email> {
+  static create(value?: string): Either<InvalidEmailError, Email> {
     if (!this.isValid(value)) {
       return left(new InvalidEmailError());
     }
 
-    const formattedEmail = this.format(value);
+    const formattedEmail = this.format(value!);
 
     return right(new Email(formattedEmail));
   }
