@@ -4,7 +4,7 @@ import { sessionRoutes } from "./session.routes";
 
 const router = Router();
 
-router.use('/', sessionRoutes);
+router.use('/session', sessionRoutes);
 router.use("/account", accountRoutes);
 
 export { router };

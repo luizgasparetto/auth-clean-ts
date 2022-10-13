@@ -10,7 +10,7 @@ async function createAdmin(): Promise<void> {
 
   const hashPassword = await hash(password, 10);
 
-  await prisma.users.create({data: {username, email, password: hashPassword, admin: true}});
+  await prisma.accounts.create({data: {username, email, password: hashPassword, admin: true}});
 }
 
-createAdmin().then(() => console.log('\nUser admin created successfully!\n'));
+createAdmin().then(() => console.log('\nAccount admin created successfully!\n'));

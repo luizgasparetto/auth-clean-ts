@@ -5,6 +5,6 @@ import { AuthenticateAccountControllerFactory } from "../factories/controllers/a
 
 const sessionRoutes = Router();
 
-sessionRoutes.post("/session", ExpressRouteAdapter.adapt(AuthenticateAccountControllerFactory.instance()));
+sessionRoutes.post("/", ExpressRouteAdapter.adapt(AuthenticateAccountControllerFactory.instance()));
 
 export { sessionRoutes };
