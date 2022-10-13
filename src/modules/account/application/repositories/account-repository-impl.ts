@@ -23,22 +23,16 @@ export class AccountRepositoryImpl implements IAccountRepository {
 
     const hashPassword = await this.criptographyService.hash(password);
 
-    const account = await prisma.accounts.create({ data: { username, email, password: hashPassword } });
+    const account = await prisma.accounts.create({ data: { username, email, password: hashPassword }});
 
     return AccountEntityMapper.toDomain(account);
   }
 
-  // TODO - Todos os campos estão sendo sobrescritos quando faço
-
   async update(data: UpdateUserDTO): Promise<void> {
-    const { user_id, username, email, password } = data;
-
-    const hashPassword = await this.criptographyService.hash(password as string);
+    const { user_id, username, email } = data;
 
     await prisma.accounts.update({
-      where: { id: user_id }, data: {
-        username, email, password: hashPassword, updated_at: new Date()
-      }
+      where: { id: user_id }, data: { username, email },
     });
   }
 

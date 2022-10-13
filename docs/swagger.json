@@ -73,15 +73,11 @@
                   },
                   "email": {
                     "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
                   }
                 },
                 "example": {
                   "username": "new_username",
-                  "email": "new@email.com",
-                  "password": "124u951298k"
+                  "email": "new@email.com"
                 }
               }
             }
@@ -92,7 +88,7 @@
             "description": "Account updated successfully"
           },
           "400": {
-            "description": "Invalid username/email/password"
+            "description": "Invalid username/email/"
           },
           "403": {
             "description": "Access denied"

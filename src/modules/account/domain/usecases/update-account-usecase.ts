@@ -3,7 +3,6 @@ import { Either, left, right } from "../../../../core/shared/logic/Either";
 
 import { Username } from "../../../../core/shared/value-objects/username";
 import { Email } from "../../../../core/shared/value-objects/email";
-import { Password } from "../../../../core/shared/value-objects/password";
 
 import { UpdateUserDTO } from "../dtos/update-user-dto";
 
@@ -26,19 +25,18 @@ export class UpdateAccountUsecase {
       return left(new UserNotFoundError());
     }
 
-    if (!data.username && !data.email && !data.password) {
+    if (!data.username && !data.email) {
       return left(new EmptyFieldsError());
     }
 
     const username = (data.username && Username.create(data.username)) || Username.create(user.props.username.value);
     const email = (data.email && Email.create(data.email)) || Email.create(user.props.email.value);
-    const password = (data.password && Password.create(data.password)) || Password.create(user.props.password.value);
 
     if (username.isLeft()) {
       return left(new InvalidUsernameError());
     }
 
-    if (email.isLeft() || password.isLeft()) {
+    if (email.isLeft()) {
       return left(new InvalidEmailOrPasswordError());
     }
 
@@ -46,7 +44,6 @@ export class UpdateAccountUsecase {
       user_id: user.id,
       username: username.value.value,
       email: email.value.value,
-      password: password.value.value
     });
 
     return right(null);
