@@ -1,5 +1,6 @@
 import { prisma } from "../../../../core/infra/prisma/client";
 import { Maybe } from "../../../../core/shared/logic/maybe";
+
 import { ICryptographyService } from "../../../../core/shared/services/cryptography/i-cryptography-service";
 
 import { CreateUserDTO } from "../../domain/dtos/create-user-dto";
@@ -9,7 +10,6 @@ import { AccountEntity } from "../../domain/entities/account-entity";
 import { IAccountRepository } from "../../domain/repositories/i-account-repository";
 import { AccountEntityMapper } from "../mappers/account-entity-mapper";
 
-import { BCryptCryptographyServiceImpl } from "../../../../core/shared/services/cryptography/bcrypt-cryptography-service-impl";
 import { UpdateUserDTO } from "../../domain/dtos/update-user-dto";
 
 
@@ -18,18 +18,17 @@ export class AccountRepositoryImpl implements IAccountRepository {
     private criptographyService: ICryptographyService
   ) { }
 
-
   async create(data: CreateUserDTO): Promise<AccountEntity> {
     const { username, email, password } = data;
 
-    const hashPassword = await new BCryptCryptographyServiceImpl().hash(password);
+    const hashPassword = await this.criptographyService.hash(password);
 
     const account = await prisma.accounts.create({ data: { username, email, password: hashPassword } });
 
     return AccountEntityMapper.toDomain(account);
   }
 
-  // TODO - Todos os campos estão sendo sobrescritos
+  // TODO - Todos os campos estão sendo sobrescritos quando faço
 
   async update(data: UpdateUserDTO): Promise<void> {
     const { user_id, username, email, password } = data;
@@ -38,8 +37,7 @@ export class AccountRepositoryImpl implements IAccountRepository {
 
     await prisma.accounts.update({
       where: { id: user_id }, data: {
-        username,
-        email, password: hashPassword, updated_at: new Date()
+        username, email, password: hashPassword, updated_at: new Date()
       }
     });
   }

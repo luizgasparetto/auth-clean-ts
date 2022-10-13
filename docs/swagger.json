@@ -51,6 +51,60 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Update an account",
+        "description": "Update the basic information of an account, as your username, email, password, etc..",
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "username": "new_username",
+                  "email": "new@email.com",
+                  "password": "124u951298k"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Account updated successfully"
+          },
+          "400": {
+            "description": "Invalid username/email/password"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Empty fields"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Account"

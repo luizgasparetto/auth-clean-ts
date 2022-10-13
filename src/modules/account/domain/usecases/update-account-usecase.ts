@@ -13,6 +13,7 @@ import { UserNotFoundError } from "../errors/user-not-found-error";
 import { InvalidEmailOrPasswordError } from "../errors/invalid-email-or-password-error";
 import { EmptyFieldsError } from "../errors/empty-fields-error";
 
+// TODO -  Trocar o modo como é feito e mandar pelas querys??
 export class UpdateAccountUsecase {
   constructor(
     private accountRepository: IAccountRepository
