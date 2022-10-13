@@ -11,6 +11,10 @@ export class HttpResponse {
     return new HttpResponse(body, 200);
   }
 
+  static error(body: any, statusCode: number = 500) {
+    return new HttpResponse(body, statusCode);
+  }
+
   static created(body: any = undefined): HttpResponse {
     return new HttpResponse(body, 201);
   }

@@ -2,7 +2,7 @@
 import { DomainError } from "../../../../../src/core/shared/errors/domain-error";
 
 import { CreateUserDTO } from "../../../../../src/modules/account/domain/dtos/create-user-dto";
-import { UserEntity } from "../../../../../src/modules/account/domain/entities/user-entity";
+import { AccountEntity } from "../../../../../src/modules/account/domain/entities/account-entity";
 
 import { CreateAccountUsecase } from "../../../../../src/modules/account/domain/usecases/create-account-usecase";
 
@@ -25,7 +25,7 @@ describe('Create User Usecase', () => {
 
     const user = await userRepository.create(dto);
 
-    expect(user).toBeInstanceOf(UserEntity);
+    expect(user).toBeInstanceOf(AccountEntity);
   });
 
   it('should throw a DomainError when try to create an User with same name', async () => {

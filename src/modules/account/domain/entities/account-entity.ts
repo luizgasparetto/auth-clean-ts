@@ -1,9 +1,9 @@
 import { Email } from "../../../../core/shared/value-objects/email";
 import { Entity } from "../../../../core/shared/contracts/entity";
 import { Password } from "../../../../core/shared/value-objects/password";
-import { Username } from "src/core/shared/value-objects/username";
+import { Username } from "../../../../core/shared/value-objects/username";
 
-export type UserEntityProps = {
+export type AccountEntityProps = {
   id?: string;
   username: Username;
   email: Email;
@@ -13,13 +13,13 @@ export type UserEntityProps = {
   updatedAt?: Date;
 }
 
-export class UserEntity extends Entity<UserEntityProps> {
-  private constructor(props: UserEntityProps, id?: string) {
+export class AccountEntity extends Entity<AccountEntityProps> {
+  private constructor(props: AccountEntityProps, id?: string) {
     super(props, id);
   }
 
-  public static create(props: UserEntityProps, id?: string) {
-    const user = new UserEntity(props, id);
+  public static create(props: AccountEntityProps, id?: string) {
+    const user = new AccountEntity(props, id);
 
     return user;
   }

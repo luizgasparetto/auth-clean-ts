@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
+model Accounts {
   id         String   @id @default(uuid())
   username   String   @unique
   email      String   @unique
@@ -16,5 +16,5 @@ model Users {
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 
-  @@map("users")
+  @@map("accounts")
 }

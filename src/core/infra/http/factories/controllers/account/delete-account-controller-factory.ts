@@ -1,4 +1,4 @@
-import { AccountRepositoryImpl } from "../../../../../../modules/account/application/repositories/user-repository-impl";
+import { AccountRepositoryImpl } from "../../../../../../modules/account/application/repositories/account-repository-impl";
 import { DeleteAccountUsecase } from "../../../../../../modules/account/domain/usecases/delete-account-usecase";
 import { DeleteAccountController } from "../../../../../../modules/account/presentation/controllers/delete-account-controller";
 

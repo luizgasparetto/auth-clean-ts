@@ -1,7 +1,7 @@
 import { DomainError } from "../../../../../src/core/shared/errors/domain-error";
 import { Maybe } from "../../../../../src/core/shared/logic/maybe";
 
-import { UserEntity, UserEntityProps } from "../../../../../src/modules/account/domain/entities/user-entity";
+import { AccountEntity, AccountEntityProps } from "../../../../../src/modules/account/domain/entities/account-entity";
 import { IAccountRepository } from "../../../../../src/modules/account/domain/repositories/i-account-repository";
 import { Email } from "../../../../../src/core/shared/value-objects/email";
 
@@ -11,9 +11,9 @@ import { Password } from "../../../../../src/core/shared/value-objects/password"
 
 // TODO - Remove DomainError
 export class InMemoryAccountRepository implements IAccountRepository {
-  public users: UserEntity[] = [];
+  public users: AccountEntity[] = [];
 
-  async create(data: CreateUserDTO): Promise<UserEntity> {
+  async create(data: CreateUserDTO): Promise<AccountEntity> {
     const { username } = data;
 
     const email = Email.create(data.email).value as Email;
@@ -21,13 +21,13 @@ export class InMemoryAccountRepository implements IAccountRepository {
 
     const userExists = await this.findUser({ username, email: email.value });
 
-    if (userExists instanceof UserEntity) {
+    if (userExists instanceof AccountEntity) {
       throw new DomainError("User already exists");
     }
 
-    const props: UserEntityProps = { username, email, password, admin: false, createdAt: new Date() };
+    const props: AccountEntityProps = { username, email, password, admin: false, createdAt: new Date() };
 
-    const user = UserEntity.create(props);
+    const user = AccountEntity.create(props);
 
     this.users.push(user);
 
@@ -37,12 +37,12 @@ export class InMemoryAccountRepository implements IAccountRepository {
   async delete(id: string): Promise<void> {
     const user = await this.findUser({ id });
 
-    const userIndex = this.users.indexOf(user as UserEntity);
+    const userIndex = this.users.indexOf(user as AccountEntity);
 
     this.users.splice(userIndex, 1);
   }
 
-  async findUser(data: FindUserDTO): Promise<Maybe<UserEntity>> {
+  async findUser(data: FindUserDTO): Promise<Maybe<AccountEntity>> {
     const { id, username, email } = data;
 
     const user = this.users.find(user => (id && user.props.id === id) ||

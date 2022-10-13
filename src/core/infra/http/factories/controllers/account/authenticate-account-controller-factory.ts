@@ -1,6 +1,6 @@
 import { Controller } from "src/core/shared/contracts/controller";
 
-import { AccountRepositoryImpl } from "../../../../../../modules/account/application/repositories/user-repository-impl";
+import { AccountRepositoryImpl } from "../../../../../../modules/account/application/repositories/account-repository-impl";
 import { AuthenticateAccountUsecase } from "../../../../../../modules/account/domain/usecases/authenticate-account-usecase";
 import { AuthenticateAccountController } from "../../../../../../modules/account/presentation/controllers/authenticate-account-controller";
 import { BCryptCryptographyServiceImpl } from "../../../../../shared/services/cryptography/bcrypt-cryptography-service-impl";

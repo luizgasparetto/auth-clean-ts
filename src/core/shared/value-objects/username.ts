@@ -13,7 +13,9 @@ export class Username {
   }
 
   static isValid(username?: string) {
-    if (!username || username.trim().length > 17) return false;
+    if (!username || username.trim().length < 4 || username.trim.length > 16) return false;
+
+    return true;
   }
 
   static format(username: string): string {
@@ -25,7 +27,7 @@ export class Username {
       return left(new InvalidUsernameError());
     }
 
-    const formattedUsername = this.format(value!);
+    const formattedUsername = this.format(value as string);
 
     return right(new Username(formattedUsername));
   }

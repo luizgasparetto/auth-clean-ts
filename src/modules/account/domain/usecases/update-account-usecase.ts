@@ -1,5 +1,5 @@
-import { DomainError } from "src/core/shared/errors/domain-error";
-import { Either, left, right } from "src/core/shared/logic/Either";
+import { DomainError } from "../../../../core/shared/errors/domain-error";
+import { Either, left, right } from "../../../../core/shared/logic/Either";
 
 import { Username } from "../../../../core/shared/value-objects/username";
 import { Email } from "../../../../core/shared/value-objects/email";
@@ -11,6 +11,7 @@ import { InvalidUsernameError } from "../errors/invalid-username-error";
 import { IAccountRepository } from "../repositories/i-account-repository";
 import { UserNotFoundError } from "../errors/user-not-found-error";
 import { InvalidEmailOrPasswordError } from "../errors/invalid-email-or-password-error";
+import { EmptyFieldsError } from "../errors/empty-fields-error";
 
 export class UpdateAccountUsecase {
   constructor(
@@ -22,6 +23,10 @@ export class UpdateAccountUsecase {
 
     if (!user) {
       return left(new UserNotFoundError());
+    }
+
+    if (!data.username && !data.email && !data.password) {
+      return left(new EmptyFieldsError());
     }
 
     const username = (data.username && Username.create(data.username)) || Username.create(user.props.username.value);
@@ -36,7 +41,12 @@ export class UpdateAccountUsecase {
       return left(new InvalidEmailOrPasswordError());
     }
 
-    await this.accountRepository.update(data);
+    await this.accountRepository.update({
+      user_id: user.id,
+      username: username.value.value,
+      email: email.value.value,
+      password: password.value.value
+    });
 
     return right(null);
   }

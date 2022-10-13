@@ -4,11 +4,11 @@ import { CreateUserDTO } from "../dtos/create-user-dto";
 import { FindUserDTO } from "../dtos/find-user-dto";
 import { UpdateUserDTO } from "../dtos/update-user-dto";
 
-import { UserEntity } from "../entities/user-entity";
+import { AccountEntity } from "../entities/account-entity";
 
 export interface IAccountRepository {
-  create(data: CreateUserDTO): Promise<UserEntity>;
-  update(data: UpdateUserDTO): Promise<UserEntity>;
+  create(data: CreateUserDTO): Promise<AccountEntity>;
+  update(data: UpdateUserDTO): Promise<void>;
   delete(id: string): Promise<void>;
-  findUser(data: FindUserDTO): Promise<Maybe<UserEntity>>;
+  findUser(data: FindUserDTO): Promise<Maybe<AccountEntity>>;
 }
