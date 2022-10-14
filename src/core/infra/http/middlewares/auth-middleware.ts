@@ -5,7 +5,7 @@ import { HttpResponse } from "../../protocols/http_response";
 import { Middleware } from "src/core/shared/contracts/middleware";
 
 type AuthMiddlewareRequest = {
-  token: string;
+  accessToken: string;
 }
 
 type IPayload = {
@@ -15,10 +15,10 @@ type IPayload = {
 export class AuthMiddleware implements Middleware {
   async handle(httpRequest: AuthMiddlewareRequest): Promise<HttpResponse> {
     try {
-      const { token } = httpRequest;
+      const { accessToken } = httpRequest;
 
-      if (token) {
-        const { sub: user_id } = decode(token) as IPayload;
+      if (accessToken) {
+        const { sub: user_id } = decode(accessToken) as IPayload;
 
         return HttpResponse.ok({ user_id });
       }

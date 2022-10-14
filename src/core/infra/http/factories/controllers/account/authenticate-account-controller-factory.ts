@@ -15,7 +15,6 @@ export class AuthenticateAccountControllerFactory {
     const dateService = new DayjsDateServiceImpl();
 
     const accountRepository = new AccountRepositoryImpl(cryptographyService);
-
     const accountTokenRepository = new AccountTokenRepositoryImpl();
 
     const authenticateUsecase = new AuthenticateAccountUsecase(cryptographyService, dateService, accountRepository, accountTokenRepository);

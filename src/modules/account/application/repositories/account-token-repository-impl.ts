@@ -10,13 +10,13 @@ import { AccountTokenEntityMapper } from "../mappers/account-token-entity-mapper
 export class AccountTokenRepositoryImpl implements IAccountTokenRepository {
 
   async create(data: CreateAccountTokenDTO): Promise<AccountTokenEntity> {
-    const { accountId, expiresDate, refreshToken } = data;
+    const { accountId, refreshToken, expiresDate } = data;
 
     const accountToken = await prisma.accountsTokens.create({
       data: {
         account_id: accountId,
-        expires_date: expiresDate,
-        refresh_token: refreshToken
+        refresh_token: refreshToken,
+        expires_date: expiresDate
       }
     });
 

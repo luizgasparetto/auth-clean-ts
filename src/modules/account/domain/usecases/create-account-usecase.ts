@@ -1,24 +1,26 @@
 import { Either, left, right } from "../../../../core/shared/logic/either";
 
 import { DomainError } from "../../../../core/shared/errors/domain-error";
+import { Email } from "../../../../core/shared/value-objects/email";
 import { AccountEntity } from "../entities/account-entity";
+
 import { InvalidEmailOrPasswordError } from "../errors/invalid-email-or-password-error";
 import { UserAlreadyExistsError } from "../errors/user-already-exists-error";
-import { IUserRepository } from "../repositories/i-account-repository";
-import { Email } from "../../../../core/shared/value-objects/email";
+
+import { IAccountRepository } from "../repositories/i-account-repository";
 
 import { CreateUserDTO } from "../dtos/create-user-dto";
 import { Password } from "../../../../core/shared/value-objects/password";
 
 export class CreateAccountUsecase {
   constructor(
-    private userRepository: IUserRepository
+    private accountRepository: IAccountRepository
   ) { }
 
   async execute(data: CreateUserDTO): Promise<Either<DomainError, AccountEntity>> {
     const { username, email, password } = data;
 
-    const userAlreadyExists = await this.userRepository.findUser({ username, email });
+    const userAlreadyExists = await this.accountRepository.findUser({ username, email });
 
     if (userAlreadyExists instanceof AccountEntity) {
       return left(new UserAlreadyExistsError());
@@ -36,7 +38,7 @@ export class CreateAccountUsecase {
       return left(new InvalidEmailOrPasswordError());
     }
 
-    const result = await this.userRepository.create(data);
+    const result = await this.accountRepository.create(data);
 
     return right(result);
   }

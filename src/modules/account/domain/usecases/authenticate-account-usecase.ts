@@ -6,6 +6,7 @@ import { ICryptographyService } from "../../../../core/shared/services/cryptogra
 import { IDateService } from "../../../../core/shared/services/date/i-date-service";
 
 import { InvalidEmailOrPasswordError } from "../errors/invalid-email-or-password-error";
+import { UserNotFoundError } from "../errors/user-not-found-error";
 import { IAccountRepository } from "../repositories/i-account-repository";
 import { IAccountTokenRepository } from "../repositories/i-account-token-repository";
 
@@ -16,7 +17,6 @@ type IRequest = {
 
 type TokenResponse = {
   accessToken: string;
-  refreshToken: string;
 }
 
 export class AuthenticateAccountUsecase {
@@ -28,29 +28,29 @@ export class AuthenticateAccountUsecase {
   ) { }
 
   async execute({ email, password }: IRequest): Promise<Either<DomainError, TokenResponse>> {
-    const user = await this.accountRepository.findUser({ email });
+    const account = await this.accountRepository.findUser({ email });
 
-    if (!user) {
-      return left(new InvalidEmailOrPasswordError());
+    if (!account) {
+      return left(new UserNotFoundError());
     }
 
-    const isPasswordValid = await this.cryptographyService.compare(password, user.props.password.value);
+    const isPasswordValid = await this.cryptographyService.compare(password, account.props.password.value);
 
     if (!isPasswordValid) {
       return left(new InvalidEmailOrPasswordError());
     }
 
-    const { token } = JWTAuthService.auth(user);
-    const { refreshToken } = JWTAuthService.refreshToken(email, user.id);
+    const { token } = JWTAuthService.auth(account);
+    //const { refreshToken } = JWTAuthService.refreshToken(email, account.id);
 
-    const refreshTokenExpiresDate = this.dateService.addDays(parseInt(process.env.EXPIRES_IN_REFRESH_TOKEN_DAYS as string));
+    const refreshTokenExpiresDate = this.dateService.addDays(30);
 
     await this.accountTokenRepository.create({
-      accountId: user.id,
-      refreshToken: refreshToken,
+      accountId: account.id,
+      refreshToken: token,
       expiresDate: refreshTokenExpiresDate,
     })
 
-    return right({ accessToken: token, refreshToken });
+    return right({ accessToken: token });
   }
 }

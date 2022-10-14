@@ -26,7 +26,7 @@ model AccountsTokens {
   account_id    String
   expires_date  DateTime
   created_at    DateTime @default(now())
-  account       Accounts @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  account       Accounts @relation(fields: [account_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("accounts_tokens")
 }
