@@ -11,6 +11,7 @@ import { IAccountRepository } from "../../domain/repositories/i-account-reposito
 import { AccountEntityMapper } from "../mappers/account-entity-mapper";
 
 import { UpdateUserDTO } from "../../domain/dtos/update-user-dto";
+import { BCryptCryptographyServiceImpl } from "../../../../core/shared/services/cryptography/bcrypt-cryptography-service-impl";
 
 
 export class AccountRepositoryImpl implements IAccountRepository {
@@ -21,9 +22,10 @@ export class AccountRepositoryImpl implements IAccountRepository {
   async create(data: CreateUserDTO): Promise<AccountEntity> {
     const { username, email, password } = data;
 
-    const hashPassword = await this.criptographyService.hash(password);
+    // await this.criptographyService.hash(password);
+    const hashPassword = await new BCryptCryptographyServiceImpl().hash(password);
 
-    const account = await prisma.accounts.create({ data: { username, email, password: hashPassword }});
+    const account = await prisma.accounts.create({ data: { username, email, password: hashPassword } });
 
     return AccountEntityMapper.toDomain(account);
   }

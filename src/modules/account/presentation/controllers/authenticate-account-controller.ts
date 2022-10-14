@@ -22,6 +22,6 @@ export class AuthenticateAccountController implements Controller<IRequest> {
       return HttpResponse.badRequest({ error: response.value.message });
     }
 
-    return HttpResponse.ok({ accessToken: response.value.token });
+    return HttpResponse.ok(response.value);
   }
 }
