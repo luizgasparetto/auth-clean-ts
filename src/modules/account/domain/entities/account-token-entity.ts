@@ -1,4 +1,4 @@
-import { Entity } from "src/core/shared/contracts/entity";
+import { Entity } from "../../../../core/shared/contracts/entity";
 
 export type AccountTokenEntityProps = {
   id: string;

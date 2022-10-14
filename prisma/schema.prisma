@@ -24,9 +24,9 @@ model AccountsTokens {
   id            String   @id @default(uuid())
   refresh_token String
   account_id    String
-  account       Accounts @relation(fields: [account_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   expires_date  DateTime
   created_at    DateTime @default(now())
+  account       Accounts @relation(fields: [account_id], references: [id], onDelete: Cascade)
 
   @@map("accounts_tokens")
 }
