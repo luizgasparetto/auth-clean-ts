@@ -23,8 +23,8 @@ export class AccountTokenRepositoryImpl implements IAccountTokenRepository {
     return AccountTokenEntityMapper.toDomain(accountToken);
   }
 
-  async findByAccountIdRefreshToken(id: string, refresh_token: string): Promise<Maybe<AccountTokenEntity>> {
-    const accountToken = await prisma.accountsTokens.findFirst({ where: { id, refresh_token } });
+  async findByAccountIdRefreshToken(account_id: string, refresh_token: string): Promise<Maybe<AccountTokenEntity>> {
+    const accountToken = await prisma.accountsTokens.findFirst({ where: { account_id, refresh_token } });
 
     if (!accountToken) return null;
 
