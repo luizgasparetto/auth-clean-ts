@@ -37,6 +37,6 @@ export class AuthenticateAccountUsecase {
 
     const { token } = JWTAuthService.auth(user);
 
-    return right({ token: token });
+    return right({ token });
   }
 }
