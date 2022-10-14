@@ -1,4 +1,4 @@
-import { DomainError } from "src/core/shared/errors/domain-error";
+import { DomainError } from "../../../../core/shared/errors/domain-error";
 
 export class RefreshTokenError extends DomainError {
   constructor() {

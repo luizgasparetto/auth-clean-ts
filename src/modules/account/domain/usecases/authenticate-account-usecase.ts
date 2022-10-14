@@ -1,4 +1,4 @@
-import { DomainError } from "src/core/shared/errors/domain-error";
+import { DomainError } from "../../../../core/shared/errors/domain-error";
 
 import { Either, left, right } from "../../../../core/shared/logic/Either";
 import { JWTAuthService } from "../../../../core/shared/services/auth/jwt-auth-service";
