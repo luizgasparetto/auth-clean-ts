@@ -6,6 +6,6 @@ import { AccountTokenEntity } from "../entities/account-token-entity";
 
 export interface IAccountTokenRepository {
   create(data: CreateAccountTokenDTO): Promise<AccountTokenEntity>;
-  findByAccountIdRefreshToken(id: string, refresh_token: string): Promise<Maybe<AccountTokenEntity>>
+  findByRefreshToken(refresh_token: string): Promise<Maybe<AccountTokenEntity>>
   deleteById(id: string): Promise<void>;
 }

@@ -1,7 +1,7 @@
 import { Entity } from "../../../../core/shared/contracts/entity";
 
 export type AccountTokenEntityProps = {
-  id: string;
+  id?: string;
   refreshToken: string;
   accountId: string;
   expiresDate: Date;

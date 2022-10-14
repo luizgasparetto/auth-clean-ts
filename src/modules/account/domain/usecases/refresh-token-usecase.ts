@@ -32,15 +32,13 @@ export class RefreshTokenUsecase {
 
     const account = await this.accountRepository.findUser({ id: account_id });
 
-    const accountToken = await this.accountTokenRepository.findByAccountIdRefreshToken(account_id, token);
+    const accountToken = await this.accountTokenRepository.findByRefreshToken(token);
 
     if (!accountToken) {
       return left(new RefreshTokenError());
     }
 
-    console.log("Account token ID on RefreshToken Usecase:" + accountToken.id);
-
-    await this.accountTokenRepository.deleteById(accountToken.id);
+    await this.accountTokenRepository.deleteById(accountToken.props.id as string);
 
     const refreshToken = sign({ email: account?.props.email.value }, process.env.SECRET_REFRESH_TOKEN as string, {
       subject: account_id,
@@ -48,6 +46,9 @@ export class RefreshTokenUsecase {
     });
 
     const refreshTokenExpiresDate = this.dateService.addDays(parseInt(process.env.EXPIRES_IN_REFRESH_TOKEN_DAYS as string));
+
+
+    // Até aqui passou
 
     await this.accountTokenRepository.create({ accountId: account_id, refreshToken, expiresDate: refreshTokenExpiresDate });
 

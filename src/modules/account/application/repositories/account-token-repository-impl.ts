@@ -8,23 +8,21 @@ import { IAccountTokenRepository } from "../../domain/repositories/i-account-tok
 import { AccountTokenEntityMapper } from "../mappers/account-token-entity-mapper";
 
 export class AccountTokenRepositoryImpl implements IAccountTokenRepository {
-
   async create(data: CreateAccountTokenDTO): Promise<AccountTokenEntity> {
     const { accountId, refreshToken, expiresDate } = data;
 
     const accountToken = await prisma.accountsTokens.create({
       data: {
         account_id: accountId,
-        refresh_token: refreshToken,
-        expires_date: expiresDate
+        refresh_token: refreshToken
       }
     });
 
     return AccountTokenEntityMapper.toDomain(accountToken);
   }
 
-  async findByAccountIdRefreshToken(account_id: string, refresh_token: string): Promise<Maybe<AccountTokenEntity>> {
-    const accountToken = await prisma.accountsTokens.findFirst({ where: { account_id, refresh_token } });
+  async findByRefreshToken(refresh_token: string): Promise<Maybe<AccountTokenEntity>> {
+    const accountToken = await prisma.accountsTokens.findFirst({ where: { refresh_token } });
 
     if (!accountToken) return null;
 
