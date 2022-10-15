@@ -22,7 +22,6 @@ interface RefreshTokenResponse {
 
 export class RefreshTokenUsecase {
   constructor(
-    private dateService: IDateService,
     private accountRepository: IAccountRepository,
     private accountTokenRepository: IAccountTokenRepository
   ) { }
@@ -45,12 +44,7 @@ export class RefreshTokenUsecase {
       expiresIn: auth.expiresInRefreshToken
     });
 
-    const refreshTokenExpiresDate = this.dateService.addDays(parseInt(process.env.EXPIRES_IN_REFRESH_TOKEN_DAYS as string));
-
-
-    // Até aqui passou
-
-    await this.accountTokenRepository.create({ accountId: account_id, refreshToken, expiresDate: refreshTokenExpiresDate });
+    await this.accountTokenRepository.create({ accountId: account_id, refreshToken });
 
     const newToken = sign({}, process.env.SECRET_ACCESS_TOKEN as string, {
       subject: account_id,

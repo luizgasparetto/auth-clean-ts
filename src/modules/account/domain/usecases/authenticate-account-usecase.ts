@@ -46,12 +46,9 @@ export class AuthenticateAccountUsecase {
     const { token } = JWTAuthService.auth(account);
     const { refreshToken } = JWTAuthService.refreshToken(email, account.id);
 
-    const refreshTokenExpiresDate = this.dateService.addDays(auth.expiresInRefreshTokenDays);
-
     await this.accountTokenRepository.create({
       accountId: account.id,
       refreshToken: refreshToken,
-      expiresDate: refreshTokenExpiresDate,
     })
 
     return right({ accessToken: token, refreshToken });
