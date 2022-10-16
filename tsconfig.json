@@ -16,13 +16,5 @@
     "resolveJsonModule": true,
     "incremental": true,
     "esModuleInterop": true,
-    // "paths": {
-    //   "@core/*": [
-    //     "./src/core/*"
-    //   ],
-    //   "@test/*": [
-    //     "./test/*"
-    //   ]
-    // }
   }
 }

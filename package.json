@@ -36,6 +36,7 @@
     "@types/jest": "^29.1.2",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "^18.8.3",
+    "@types/nodemailer": "^6.4.6",
     "@types/pg": "^8.6.5",
     "@types/supertest": "^2.0.12",
     "@types/swagger-ui-express": "^4.1.3",
