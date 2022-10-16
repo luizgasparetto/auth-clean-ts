@@ -15,7 +15,7 @@ const accountRoutes = Router();
 const authMiddleware = ExpressMiddlewareAdapter.adapt(AuthMiddlewareFactory.instance());
 
 accountRoutes.post("/", ExpressRouteAdapter.adapt(CreateAccountControllerFactory.instance()));
-accountRoutes.post("/forgot-password", ExpressRouteAdapter.adapt(SendForgotPasswordEmailControllerFactory.instance()));
+accountRoutes.post("/forgot-password", authMiddleware, ExpressRouteAdapter.adapt(SendForgotPasswordEmailControllerFactory.instance()));
 accountRoutes.put("/", authMiddleware, ExpressRouteAdapter.adapt(UpdateAccountControllerFactory.instance()));
 accountRoutes.delete("/", authMiddleware, ExpressRouteAdapter.adapt(DeleteAccountControllerFactory.instance()));
 

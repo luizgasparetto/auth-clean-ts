@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import path from "path";
 
 import { DomainError } from "../../../../core/shared/errors/domain-error";
 import { Either, left, right } from "../../../../core/shared/logic/Either";
@@ -19,6 +20,7 @@ export class SendForgotPasswordEmailUsecase {
 
   async execute(id: string): Promise<Either<DomainError, null>> {
     const account = await this.accountRepository.findUser({ id });
+    const templatePath = path.resolve(__dirname, "..", "..", "presentation", "views", "emails", "forgot-password.hbs");
 
     if (!account) {
       return left(new UserNotFoundError());
@@ -28,7 +30,17 @@ export class SendForgotPasswordEmailUsecase {
 
     await this.accountTokenRepository.create({ accountId: account.id, refreshToken: token });
 
-    await this.mailService.sendMail(account.props.email.value, "Password Recovery", `O link para o reset é: ${token}`);
+    const variables = {
+      name: account.props.username.value,
+      link: `${process.env.FORGOT_PASSWORD_URL}${token}`
+    }
+
+    await this.mailService.sendMail(
+      account.props.email.value,
+      "Password Recovery",
+      variables,
+      templatePath
+    );
 
     return right(null);
   }

@@ -1,5 +1,6 @@
-import { HttpResponse } from "src/core/infra/protocols/http_response";
+import { HttpResponse } from "../../../../core/infra/protocols/http_response";
 import { Controller } from "../../../../core/shared/contracts/controller";
+
 import { SendForgotPasswordEmailUsecase } from "../../domain/usecases/send-forgot-password-email-usecase";
 
 export class SendForgotPasswordEmailController implements Controller {

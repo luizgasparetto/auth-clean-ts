@@ -1,6 +1,10 @@
-import { IMailService } from "./i-mail-service";
+import fs from "fs";
 
 import nodemailer, { Transporter } from 'nodemailer';
+import handlebars from "handlebars";
+
+import { IMailService } from "./i-mail-service";
+
 
 export class EtherealMailServiceImpl implements IMailService {
   private client: Transporter;
@@ -21,13 +25,18 @@ export class EtherealMailServiceImpl implements IMailService {
     }).catch(err => console.log(err));
   }
 
-  async sendMail(to: string, subject: string, body: string): Promise<void> {
+  async sendMail(to: string, subject: string, variables: any, path: string): Promise<void> {
+    const templateFileContent = fs.readFileSync(path).toString("utf-8");
+
+    const templateParse = handlebars.compile(templateFileContent);
+
+    const templateHTML = templateParse(variables);
+
     const message = await this.client.sendMail({
       to,
       from: "TurnPro <noreply@turnpro.com>",
       subject,
-      text: body,
-      html: body
+      html: templateHTML
     });
 
     console.log("Message sent: %s", message.messageId);
