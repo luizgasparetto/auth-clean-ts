@@ -34,7 +34,7 @@ export class EtherealMailServiceImpl implements IMailService {
 
     const message = await this.client.sendMail({
       to,
-      from: "TurnPro <noreply@turnpro.com>",
+      from: "Auth <noreply@authapi.com>",
       subject,
       html: templateHTML
     });

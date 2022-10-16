@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "TurnPro Documentation",
-    "description": "This is the TurnPro API Documentation, an API that's will be used on our MobileApp, fell free to contact us if you have any advice or idea",
+    "title": "Auth API Documentation",
+    "description": "This is an Auth API Documentation, an API that's will be used on our MobileApp, fell free to contact us if you have any advice or idea",
     "version": "1.0.0",
     "contact": {
       "email": "luizegasp@gmail.com"

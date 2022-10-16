@@ -1,4 +1,4 @@
-# TurnPro API
+# Auth API
 
 ---
 

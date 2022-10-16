@@ -1,4 +1,4 @@
-name: TurnPro CI
+name: CI
 
 on:
   pull_request:
